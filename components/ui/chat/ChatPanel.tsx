@@ -1,17 +1,12 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, type HTMLMotionProps } from "framer-motion";
 import type { UIMessage } from "ai";
 import ChatMessage from "./ChatMessage";
 import { cn } from "@/lib/utils";
 
-interface AnimationProps {
-  initial: object;
-  animate: object;
-  exit: object;
-  transition?: object;
-}
+type AnimationProps = Pick<HTMLMotionProps<"div">, "initial" | "animate" | "exit" | "transition">;
 
 interface ChatPanelProps {
   messages: UIMessage[];
