@@ -26,14 +26,10 @@ export const SmoothScroll = ({ children }: { children: React.ReactNode }) => {
 
     lenisRef.current = lenis;
 
-    const onScroll = ({ scroll, limit, velocity, direction }: { 
-      scroll: number; 
-      limit: number; 
-      velocity: number; 
-      direction: 1 | -1 
-    }) => {
-      const progress = scroll / limit;
-      setScrollState(progress, Math.abs(velocity), direction);
+    const onScroll = (l: Lenis) => {
+      const progress = l.scroll / l.limit;
+      const direction = l.direction === 0 ? 1 : l.direction;
+      setScrollState(progress, Math.abs(l.velocity), direction);
     };
 
     lenis.on("scroll", onScroll);
