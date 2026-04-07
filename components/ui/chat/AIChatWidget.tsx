@@ -11,9 +11,7 @@ const AIChatWidget = () => {
   const { isChatOpen, setChatOpen, toggleChat } = useUIStore();
   const prefersReducedMotion = useReducedMotion();
 
-  const { messages, status, error, sendMessage } = useChat({
-    api: "/api/chat",
-  });
+  const { messages, status, error, sendMessage } = useChat();
 
   const isLoading = status === 'submitted' || status === 'streaming';
 
