@@ -77,7 +77,6 @@ export async function POST(req: Request) {
       messages: modelMessages,
       system: SYSTEM_PROMPT,
       temperature: 0.5,
-      maxTokens: 400,
     });
     return result.toUIMessageStreamResponse();
   } catch (error) {
@@ -88,7 +87,6 @@ export async function POST(req: Request) {
         messages: modelMessages,
         system: SYSTEM_PROMPT,
         temperature: 0.5,
-        maxTokens: 400,
       });
       return result.toUIMessageStreamResponse();
     } catch {
