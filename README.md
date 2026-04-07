@@ -19,6 +19,7 @@ Live site: [karinga.dev](https://karinga.dev)
 | 3D | Three.js + React Three Fiber + Drei |
 | Animation | GSAP 3 + ScrollTrigger · Framer Motion 12 · Lenis smooth scroll |
 | AI | Vercel AI SDK v6 (`ai`) + `@ai-sdk/anthropic` (Claude) |
+| Rate Limiting | Upstash Redis (`@upstash/ratelimit`) |
 | State | Zustand 5 |
 | Validation | Zod 4 |
 | Deployment | Vercel |
@@ -90,6 +91,8 @@ Create a `.env.local` file in the root:
 ```env
 ANTHROPIC_API_KEY=sk-ant-...
 NEXT_PUBLIC_BASE_URL=http://localhost:3000
+UPSTASH_REDIS_REST_URL=https://...
+UPSTASH_REDIS_REST_TOKEN=...
 ```
 
 > `.env.local` is gitignored — never commit your API key.
@@ -119,12 +122,15 @@ Deployed on **Vercel**. Required environment variables in the Vercel dashboard:
 |---|---|
 | `ANTHROPIC_API_KEY` | Anthropic API key for the AI chat widget |
 | `NEXT_PUBLIC_BASE_URL` | Production URL (e.g. `https://karinga.dev`) |
+| `UPSTASH_REDIS_REST_URL` | Upstash Redis URL for rate limiting |
+| `UPSTASH_REDIS_REST_TOKEN` | Upstash Redis token for rate limiting |
 
 ---
 
 ## Architecture Notes
 
-- **AI SDK v6 migration** — Uses `sendMessage({ text })` (not legacy `append`), `UIMessage` with `.parts`, and `toUIMessageStreamResponse()` on the backend. See `components/ui/chat/` and `app/api/chat/route.ts`.
+- **AI chat guardrails** — Rate limited to 10 requests/hour per IP via Upstash Redis. Topic-scoped system prompt refuses off-topic usage. 400 token cap per response, 500 character input limit, 10-message history cap.
+- **AI SDK v6** — Uses `sendMessage({ text })`, `UIMessage` with `.parts`, `toUIMessageStreamResponse()`. See `components/ui/chat/` and `app/api/chat/route.ts`.
 - **Lenis + GSAP sync** — `lenis.on("scroll", ScrollTrigger.update)` in `SmoothScroll.tsx` keeps virtual scroll and ScrollTrigger in frame-accurate sync.
 - **CSS custom properties** — All colors are defined as CSS variables (`--color-bg`, `--color-accent`, etc.) and consumed via Tailwind's `var()` syntax. No arbitrary hex values.
 - **No component exceeds 250 lines** — Single-responsibility pattern enforced throughout.
@@ -136,7 +142,7 @@ Deployed on **Vercel**. Required environment variables in the Vercel dashboard:
 **Nagesh Goud Karinga**
 Full-Stack Engineer & AI Systems Architect
 
-
+[karinga.dev](https://karinga.dev) · [GitHub](https://github.com/Nkaringa)
 
 ---
 

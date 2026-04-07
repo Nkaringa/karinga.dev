@@ -200,4 +200,5 @@ All custom properties are exposed as Tailwind tokens via `@theme` in `globals.cs
 - **Platform:** Vercel
 - **Branch strategy:** `master` → production (karinga.dev), `dev` → preview deployments
 - **Environment variables:** Managed via Vercel dashboard, never committed (see `.env.local.example`)
+- **Rate limiting:** Upstash Redis (`@upstash/ratelimit`) — sliding window, 10 req/hour per IP. Persistent across serverless function instances.
 - **Analytics:** Vercel Analytics + Speed Insights enabled
