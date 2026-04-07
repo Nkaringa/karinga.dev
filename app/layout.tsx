@@ -7,6 +7,8 @@ import { Scene } from "@/components/canvas/Scene";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { PageTransition } from "@/components/layout/PageTransition";
 import AIChatWidget from "@/components/ui/chat/AIChatWidget";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
   variable: "--font-sans",
@@ -81,6 +83,8 @@ export default function RootLayout({
 
         {/* Global AI Assistant */}
         <AIChatWidget />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
