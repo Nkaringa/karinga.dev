@@ -1,0 +1,52 @@
+# --- Next.js ---
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+
+# --- Dependencies ---
+node_modules/
+
+# --- Environment variables ---
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# --- Build outputs ---
+dist/
+dist-ssr/
+build/
+
+# --- Vercel ---
+.vercel
+
+# --- Logs ---
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# --- Agent workflow (internal only) ---
+.claude/
+.gemini/
+REVIEW_FEEDBACK.md
+GEMINI_LOG.md
+MY_BRAIN.md
+iteration15.md
+
+# --- OS / Editor ---
+.DS_Store
+Thumbs.db
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.vscode/*
+!.vscode/extensions.json
